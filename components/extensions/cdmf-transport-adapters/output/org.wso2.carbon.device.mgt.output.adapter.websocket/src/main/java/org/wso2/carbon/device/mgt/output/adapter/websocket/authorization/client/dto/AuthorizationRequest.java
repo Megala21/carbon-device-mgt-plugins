@@ -24,6 +24,8 @@ public class AuthorizationRequest {
     String username;
     List<DeviceIdentifier> deviceIdentifiers;
     List<String> permissions;
+    String groupName;
+
 
     public String getTenantDomain() {
         return tenantDomain;
@@ -55,5 +57,13 @@ public class AuthorizationRequest {
 
     public void setPermissions(List<String> permissions) {
         this.permissions = permissions;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 }

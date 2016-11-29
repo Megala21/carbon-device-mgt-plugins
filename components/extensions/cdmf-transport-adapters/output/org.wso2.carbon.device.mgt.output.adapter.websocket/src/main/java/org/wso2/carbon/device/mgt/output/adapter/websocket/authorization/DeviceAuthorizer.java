@@ -70,21 +70,26 @@ public class DeviceAuthorizer implements Authorizer {
         Map<String, String> queryParams = webSocketSessionRequest.getQueryParamValuePairs();
         String deviceId = queryParams.get("deviceId");
         String deviceType = queryParams.get("deviceType");
+        String groupName = queryParams.get("groupName");
 
-        if (deviceId != null && !deviceId.isEmpty() && deviceType != null && !deviceType.isEmpty()) {
-
+        if ((deviceId != null && !deviceId.isEmpty() && deviceType != null && !deviceType.isEmpty()) || (
+                groupName != null && !groupName.isEmpty())) {
             AuthorizationRequest authorizationRequest = new AuthorizationRequest();
             authorizationRequest.setTenantDomain(authenticationInfo.getTenantDomain());
             if (statPermissions != null && !statPermissions.isEmpty()) {
                 authorizationRequest.setPermissions(statPermissions);
             }
             authorizationRequest.setUsername(authenticationInfo.getUsername());
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(deviceType);
-            List<DeviceIdentifier> deviceIdentifiers = new ArrayList<>();
-            deviceIdentifiers.add(deviceIdentifier);
-            authorizationRequest.setDeviceIdentifiers(deviceIdentifiers);
+
+            if (deviceId != null) {
+                DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+                deviceIdentifier.setId(deviceId);
+                deviceIdentifier.setType(deviceType);
+                List<DeviceIdentifier> deviceIdentifiers = new ArrayList<>();
+                deviceIdentifiers.add(deviceIdentifier);
+                authorizationRequest.setDeviceIdentifiers(deviceIdentifiers);
+            }
+            authorizationRequest.setGroupName(groupName);
             try {
                 DeviceAuthorizationResult deviceAuthorizationResult =
                         deviceAccessAuthorizationAdminService.isAuthorized(authorizationRequest);
