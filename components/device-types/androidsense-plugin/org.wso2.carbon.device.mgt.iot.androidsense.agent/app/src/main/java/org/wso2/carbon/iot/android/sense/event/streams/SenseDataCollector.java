@@ -15,17 +15,17 @@
 package org.wso2.carbon.iot.android.sense.event.streams;
 
 import android.content.Context;
-import org.wso2.carbon.iot.android.sense.event.streams.Location.LocationDataReader;
-import org.wso2.carbon.iot.android.sense.event.streams.Sensor.SensorDataReader;
-import org.wso2.carbon.iot.android.sense.event.streams.Speed.SpeedDataReader;
-import org.wso2.carbon.iot.android.sense.beacon.MonitoringActivity;
+import org.wso2.carbon.iot.android.sense.event.streams.location.LocationDataReader;
+import org.wso2.carbon.iot.android.sense.event.streams.sensor.SensorDataReader;
+import org.wso2.carbon.iot.android.sense.event.streams.speed.SpeedDataReader;
+import org.wso2.carbon.iot.android.sense.event.streams.audio.AudioDataReader;
 
 /**
  * This class triggered by service to collect the sensor data.
  */
 public class SenseDataCollector {
     public enum DataType {
-        SENSOR, LOCATION,SPEED
+        SENSOR, LOCATION,SPEED, AUDIO
     }
 
     public SenseDataCollector(Context ctx, DataType dt) {
@@ -39,6 +39,9 @@ public class SenseDataCollector {
                 break;
             case SPEED:
                 dr = new SpeedDataReader(ctx);
+                break;
+            case AUDIO:
+                dr = new AudioDataReader(ctx);
                 break;
 
         }

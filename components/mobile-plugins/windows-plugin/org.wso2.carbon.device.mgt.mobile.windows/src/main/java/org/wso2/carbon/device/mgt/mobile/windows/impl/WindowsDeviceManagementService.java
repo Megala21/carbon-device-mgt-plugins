@@ -18,18 +18,13 @@
 
 package org.wso2.carbon.device.mgt.mobile.windows.impl;
 
-import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
+import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
 import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
-import org.wso2.carbon.device.mgt.common.app.mgt.Application;
-import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManagementException;
 import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
-import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
 import org.wso2.carbon.device.mgt.common.push.notification.PushNotificationConfig;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
-
-import java.util.List;
 
 /**
  * This represents the Windows implementation of DeviceManagerService.
@@ -43,6 +38,11 @@ public class WindowsDeviceManagementService implements DeviceManagementService {
     @Override
     public String getType() {
         return WindowsDeviceManagementService.DEVICE_TYPE_WINDOWS;
+    }
+
+    @Override
+    public OperationMonitoringTaskConfig getOperationMonitoringConfig() {
+        return null;
     }
 
     @Override
